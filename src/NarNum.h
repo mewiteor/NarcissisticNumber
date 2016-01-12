@@ -22,6 +22,7 @@
 #define _NAR_NUM_H_ 1
 
 #include <stdbool.h>
+#include <stdio.h>
 
 typedef unsigned char BaseType;
 typedef unsigned short DigitType, DoubleBaseType;
@@ -96,7 +97,7 @@ bool Init(
     );
 void Search(NarNumParam *param);
 void Release(NarNumParam *param);
-void Print(const Big* b,const BaseType base);
+void Print(const Big* b,const BaseType base,FILE *stream);
 int  BigCmp(const Big* a, const Big* b);
 void BigsFree(Big** nums, size_t size);
 

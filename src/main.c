@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
     {
         if (argv[1][0] != 't')
             printf("%4d:", i + base + 1);
-        Print(res + i, base);
+        Print(res + i, base,stdout);
         putchar(argv[1][0] != 't' ? '\n' : ' ');
     }
     if (argv[1][0] == 't')

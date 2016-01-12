@@ -321,8 +321,8 @@ void Check(const Big* sum, NarNumParam *param)
         assert(param->res != NULL);
         if (param->showProgress)
         {
-            Print(sum, param->base);
-            putchar('\n');
+            Print(sum, param->base,stderr);
+            fputc('\n',stderr);
         }
         tmp_res = (Big*)realloc(*param->res, (*param->resSize + 1)*sizeof(Big));
         if (!tmp_res)
@@ -336,22 +336,22 @@ void Check(const Big* sum, NarNumParam *param)
     free(tmp);
 }
 
-void Print(const Big* sum, const BaseType base)
+void Print(const Big* sum, const BaseType base,FILE *stream)
 {
     DigitType i;
 
     assert(sum != NULL);
 
     if (!sum->size)
-        fputchar('0',stderr);
+        fputc('0',stream);
     else
     {
         for (i = sum->size; i-- > 0;)
         {
             if (base < 37)
-                fputchar(sum->data[i] < 10 ? sum->data[i] + '0' : sum->data[i] + 'A' - 10,stderr);
+                fputc(sum->data[i] < 10 ? sum->data[i] + '0' : sum->data[i] + 'A' - 10,stream);
             else
-                fprintf(stderr,"%u%s", sum->data[i], i ? "," : "");
+                fprintf(stream,"%u%s", sum->data[i], i ? "," : "");
         }
     }
 }
