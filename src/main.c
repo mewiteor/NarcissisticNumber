@@ -38,30 +38,29 @@ int main(int argc, char* argv[])
     size_t size = 0;
     clock_t c;
     bool showProgress;
-    FILE *errOut = stdout;
 
     if (argc != 3 ||
         !argv[1][0] ||
         argv[1][1] ||
-        ((argv[1][0] | 0x20) != 'y' && (argv[1][0] | 0x20) != 'n' && (argv[1][0] | 0x20) != 't') ||
+        ((argv[1][0] | 0x20) != 'n' && (argv[1][0] | 0x20) != 't') ||
         sscanf(argv[2], "%d", &base) != 1)
     {
-        fprintf(errOut, "%s <whether print progress or not(y/N)> <base>\n", argv[0]);
-        fprintf(errOut, "%s <test mode (t/T)> <base>\n", argv[0]);
+        fprintf(stderr, "%s <normal mode(n/N)> <base>\n", argv[0]);
+        fprintf(stderr, "%s <test mode (t/T)> <base>\n", argv[0]);
         return EXIT_FAILURE;
     }
 
     argv[1][0] |= 0x20;
-    showProgress = argv[1][0] == 'y';
+    showProgress = argv[1][0] == 'n';
 
     if (base < 2)
     {
-        fputs("Base is too little.", errOut);
+        fputs("Base is too little.", stderr);
         return EXIT_FAILURE;
     }
     if (base > 255)
     {
-        fputs("Base is too large.", errOut);
+        fputs("Base is too large.", stderr);
         return EXIT_FAILURE;
     }
 
@@ -79,7 +78,7 @@ int main(int argc, char* argv[])
         }
     }
     if (showProgress)
-        printf("time:%fs\n", (double)(clock() - c) / CLOCKS_PER_SEC);
+        fprintf(stderr,"time:%fs\n", (double)(clock() - c) / CLOCKS_PER_SEC);
     qsort(res, size, sizeof(Big), cmp);
     for (i = 0; i < base; ++i)
     {

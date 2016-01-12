@@ -343,15 +343,15 @@ void Print(const Big* sum, const BaseType base)
     assert(sum != NULL);
 
     if (!sum->size)
-        putchar('0');
+        fputchar('0',stderr);
     else
     {
         for (i = sum->size; i-- > 0;)
         {
             if (base < 37)
-                putchar(sum->data[i] < 10 ? sum->data[i] + '0' : sum->data[i] + 'A' - 10);
+                fputchar(sum->data[i] < 10 ? sum->data[i] + '0' : sum->data[i] + 'A' - 10,stderr);
             else
-                printf("%u%s", sum->data[i], i ? "," : "");
+                fprintf(stderr,"%u%s", sum->data[i], i ? "," : "");
         }
     }
 }
