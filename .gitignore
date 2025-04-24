@@ -1,2 +1,5 @@
 *.un~
 build/
+.vscode
+*.swp
+__pycache__
