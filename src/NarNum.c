@@ -326,12 +326,12 @@ void Check(const Big* sum, NarNumParam *param)
         }
         tmp_res = (Big*)realloc(*param->res, (*param->resSize + 1)*sizeof(Big));
         if (!tmp_res)
-        {
             Release(param);
-            return;
+        else
+        {
+            *param->res = tmp_res;
+            BigCpy(*param->res + (*param->resSize)++, sum);
         }
-        *param->res = tmp_res;
-        BigCpy(*param->res + (*param->resSize)++, sum);
     }
     free(tmp);
 }
